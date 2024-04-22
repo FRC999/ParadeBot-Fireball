@@ -4,8 +4,10 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -15,15 +17,42 @@ public class DriveSubsytem extends SubsystemBase {
   private final WPI_TalonSRX leftRearMotor = new WPI_TalonSRX(Constants.DriveConstants.leftRearMotorCANID);
   private final WPI_TalonSRX rightRearMotor = new WPI_TalonSRX(Constants.DriveConstants.rightRearMotorCANID);
   /** Creates a new DriveSubsytem. */
+
+  DifferentialDrive diffDrive;
   
-  public DriveSubsytem() {}
+  public DriveSubsytem() {
+    diffDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+  }
   
   private void configureMotors(){
     leftFrontMotor.configFactoryDefault();
     rightFrontMotor.configFactoryDefault();
     leftRearMotor.configFactoryDefault();
     rightRearMotor.configFactoryDefault();
+
+    leftFrontMotor.setInverted(Constants.DriveConstants.leftFrontMotorInverted);
+    rightFrontMotor.setInverted(Constants.DriveConstants.rightFrontMotorInverted);
+    leftRearMotor.setInverted(Constants.DriveConstants.leftRearMotorInverted);
+    rightRearMotor.setInverted(Constants.DriveConstants.rightRearMotorInverted);
+
+    leftRearMotor.follow(leftFrontMotor);
+    rightRearMotor.follow(rightFrontMotor);
+
   } 
+
+  public void setBrakeMode() {
+    leftFrontMotor.setNeutralMode(NeutralMode.Brake);
+    rightFrontMotor.setNeutralMode(NeutralMode.Brake);
+    leftRearMotor.setNeutralMode(NeutralMode.Brake);
+    rightRearMotor.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void manualDrive(double speed, double turn) {
+    diffDrive.arcadeDrive(speed, turn);
+  }
+
+
+  
   
   @Override
   public void periodic() {
