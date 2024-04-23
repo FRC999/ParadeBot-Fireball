@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+//import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -21,7 +22,8 @@ public class DriveSubsytem extends SubsystemBase {
   DifferentialDrive diffDrive;
   
   public DriveSubsytem() {
-    diffDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+    configureMotors();
+    //diffDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
   }
   
   private void configureMotors(){
@@ -47,13 +49,17 @@ public class DriveSubsytem extends SubsystemBase {
     rightRearMotor.setNeutralMode(NeutralMode.Brake);
   }
 
-  public void manualDrive(double speed, double turn) {
-    diffDrive.arcadeDrive(speed, turn);
-  }
+ public void manualDrive(double speed, double turn) {
+     diffDrive.arcadeDrive(speed, turn);
+ }
+ public void testRightLeaderMotor(double power) {
+  rightFrontMotor.set(power);
+}
 
+  public void testLeftLeaderMotor(double power) {
+  leftFrontMotor.set(power);
+}
 
-  
-  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

@@ -31,7 +31,7 @@ public final class Constants {
   }
 
  public static final class OIConstants {
-		public static final int driverControllerPort = 0;
+		public static final int driverControllerPort = 4;
 
 		public static enum ControllerDeviceType {
 			LOGITECH,
@@ -43,7 +43,7 @@ public final class Constants {
 		public static enum ControllerDevice {
 			
 			XBOX_CONTROLLER(
-					0, // Port Number for Xbox controller
+					4, // Port Number for Xbox controller
 					ControllerDeviceType.XBOX,
 					0.03, // deadband X for Xbox
 					0.03, // deadband Y for Xbox //TODO: ALL DEADBAND FOR XBOX IS PLACEHOLDER

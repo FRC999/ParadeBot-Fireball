@@ -4,13 +4,18 @@
 
 package frc.robot;
 
+import frc.robot.Constants.OIConstants.ControllerDevice;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsytem;
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -26,16 +31,22 @@ public class RobotContainer {
    public final static DriveSubsytem driveSubsystem = new DriveSubsytem(); 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController xboxController =
-      new CommandXboxController(Constants.OIConstants.driverControllerPort);
+  
+  private final Controller xboxController =
+      new Controller(Constants.OIConstants.ControllerDevice.XBOX_CONTROLLER);
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
-    // Configure the trigger bindings
+  public RobotContainer(){
+    //configure the trigger bindings
     configureBindings();
+    testMotors();
+
+    //  driveSubsystem.setDefaultCommand(
+    //     new DriveManuallyCommand(
+    //         () -> getDriverXAxis(),
+    //         () -> getDriverYAxis()));
   }
 
-  /**
+   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
    * predicate, or via the named factories in {@link
@@ -46,8 +57,32 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
+    new Trigger(m_exampleSubsystem::exampleCondition)
+        .onTrue(new ExampleCommand(m_exampleSubsystem));
 
+    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
+    // cancelling on release.
+   // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   }
+
+  
+  private void testMotors() {
+    new JoystickButton(xboxController, 4)
+        .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.2)))
+        .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.0)));
+    new JoystickButton(xboxController, 1)
+        .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightLeaderMotor(0.2)))
+        .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightLeaderMotor(0.0)));
+  }
+
+  private double getDriverXAxis() {
+    return -xboxController.getLeftStickY();
+  }
+
+  private double getDriverYAxis() {
+    return -xboxController.getRightStickX();
+  }
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
