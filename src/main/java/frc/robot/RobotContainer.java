@@ -9,6 +9,12 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.FireBallStop;
+import frc.robot.commands.IntakeIn;
+import frc.robot.commands.IntakeOut;
+import frc.robot.commands.LeftFireBall;
+import frc.robot.commands.RightFireBall;
+import frc.robot.commands.ShooterStop;
 import frc.robot.subsystems.DriveSubsytem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -40,7 +46,7 @@ public class RobotContainer {
   public RobotContainer(){
     //configure the trigger bindings
     configureBindings();
-    //testMotors();
+    testMotors();
 
       driveSubsystem.setDefaultCommand(
          new DriveManuallyCommand(
@@ -69,12 +75,24 @@ public class RobotContainer {
 
   
   private void testMotors() {
-    new JoystickButton(xboxController, 4)
+    /*new JoystickButton(xboxController, 3)
         .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightLeaderMotor(0.6)))
         .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightLeaderMotor(0.0)));
-    new JoystickButton(xboxController, 1)
+    new JoystickButton(xboxController, 4)
         .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.6)))
-        .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.0)));
+        .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.0)));*/
+    new JoystickButton(xboxController, Constants.OperatorConstants.shooterIntakeIn)
+        .whileTrue(new IntakeIn())
+        .whileFalse(new ShooterStop());
+    new JoystickButton(xboxController, Constants.OperatorConstants.shooterIntakeOut)
+        .whileTrue(new IntakeOut())
+        .whileFalse(new ShooterStop());
+    new JoystickButton(xboxController, Constants.OperatorConstants.fireBallLeft)
+      .whileTrue(new LeftFireBall())
+      .whileFalse(new FireBallStop());
+    new JoystickButton(xboxController, Constants.OperatorConstants.fireBallRight)
+      .whileTrue(new RightFireBall())
+      .whileFalse(new FireBallStop());
   }
 
   private double getDriverXAxis() {

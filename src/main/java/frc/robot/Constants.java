@@ -15,6 +15,10 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+	public static final int shooterIntakeOut = 1;
+	public static final int shooterIntakeIn = 2;
+	public static final int fireBallRight = 3;
+	public static final int fireBallLeft = 4;
   }
   public static class DriveConstants {
     public static final int rightFrontMotorCANID = 3 ;
@@ -22,16 +26,13 @@ public final class Constants {
     public static final int leftFrontMotorCANID = 1 ;
     public static final int leftRearMotorCANID = 2 ;
 
-
-	public static final int rightSpinnerMotorCANID = 6;
-	public static final int leftSpinnerMotorCANID =5;
     
     public static final boolean rightFrontMotorInverted = true;
 	public static final boolean rightRearMotorInverted = true;
     public static final boolean leftFrontMotorInverted = false;
     public static final boolean leftRearMotorInverted = false;
-	public static final boolean rightSpinnerMotorInverted = true;
-	public static final boolean leftSpinnerMotorInverted = false;
+	public static final boolean rightSpinnerMotorInverted = false;
+	public static final boolean leftSpinnerMotorInverted = true;
     public static double turnAdjust = 0.6;
   }
 
@@ -104,6 +105,32 @@ public final class Constants {
 				return cubeControllerRightStick;
 			}
 		}
+	}
+
+	public static final class GPMConstants {
+		public static final double IntakeSpeed = -0.7;
+
+		public static final double ShooterSpeed = 0.9;
+
+		public static final double StopIntake = 0.0;
+
+		public static final int rightSpinnerMotorCANID = 6;
+
+		public static final int leftSpinnerMotorCANID = 5;
+
+		public static final int FireBallCANID = 8;
+
+		public static final double FireBallSpeed = 0.3;
+
+		public static final double fireBallStop = 0.0;
+	}
+
+	public static final class CurrentLimitConstants {
+		public static final int angleContinuousCurrentLimit = 1; // amperes
+        	public static final int anglePeakCurrentLimit = 5; // amperes
+			public static final int anglePeakCurrentDuration = 1000; // Milliseconds
+			public static final boolean angleEnableCurrentLimit = true;
+			public static final int configureTimeoutMs = 30;
 	}
 
 }

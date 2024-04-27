@@ -12,26 +12,62 @@ import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-  private final WPI_TalonSRX rightSpinnerMotor = new WPI_TalonSRX(Constants.DriveConstants.rightSpinnerMotorCANID);
-  private final WPI_TalonSRX leftSpinnerMotor = new WPI_TalonSRX(Constants.DriveConstants.leftSpinnerMotorCANID);
+  private final WPI_TalonSRX rightSpinnerMotor;
+  private final WPI_TalonSRX leftSpinnerMotor;
+  private final WPI_TalonSRX fireBallMotor;
 
   
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
+    rightSpinnerMotor = new WPI_TalonSRX(Constants.GPMConstants.rightSpinnerMotorCANID);
+    leftSpinnerMotor = new WPI_TalonSRX(Constants.GPMConstants.leftSpinnerMotorCANID);
+    fireBallMotor = new WPI_TalonSRX(Constants.GPMConstants.FireBallCANID);
     configureMotors();
+    configureCurrentLimiterFireball();
   }
 
   public void configureMotors(){
   rightSpinnerMotor.setInverted(Constants.DriveConstants.rightSpinnerMotorInverted);
   leftSpinnerMotor.setInverted(Constants.DriveConstants.leftSpinnerMotorInverted);
  
-  rightSpinnerMotor.follow(leftSpinnerMotor);
+  leftSpinnerMotor.follow(rightSpinnerMotor);
   }
 
   public void setBrakeMode() {
     rightSpinnerMotor.setNeutralMode(NeutralMode.Brake);
     leftSpinnerMotor.setNeutralMode(NeutralMode.Brake);
 
+  }
+
+  public void spinIntakeForward() {
+    rightSpinnerMotor.set(Constants.GPMConstants.ShooterSpeed);
+  }
+
+  public void spinIntakeReverse() {
+    rightSpinnerMotor.set(Constants.GPMConstants.IntakeSpeed);
+  }
+
+  public void stopIntakeMotor() {
+    rightSpinnerMotor.set(Constants.GPMConstants.StopIntake);
+  }
+
+  public void FireBallRight() {
+    fireBallMotor.set(Constants.GPMConstants.FireBallSpeed);
+  }
+
+  public void FireBallLeft() {
+    fireBallMotor.set(-Constants.GPMConstants.FireBallSpeed);
+  }
+
+  public void FireBallStop() {
+    fireBallMotor.set(Constants.GPMConstants.fireBallStop);
+  }
+
+  private void configureCurrentLimiterFireball() {
+    fireBallMotor.configPeakCurrentLimit(Constants.CurrentLimitConstants.anglePeakCurrentLimit, Constants.CurrentLimitConstants.configureTimeoutMs);
+    fireBallMotor.configPeakCurrentDuration(Constants.CurrentLimitConstants.anglePeakCurrentDuration, Constants.CurrentLimitConstants.configureTimeoutMs);
+    fireBallMotor.configContinuousCurrentLimit(Constants.CurrentLimitConstants.angleContinuousCurrentLimit, Constants.CurrentLimitConstants.configureTimeoutMs);
+    fireBallMotor.enableCurrentLimit(Constants.CurrentLimitConstants.angleEnableCurrentLimit);
   }
 
 
