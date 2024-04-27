@@ -17,6 +17,8 @@ public class DriveSubsytem extends SubsystemBase {
   private final WPI_TalonSRX rightFrontMotor = new WPI_TalonSRX(Constants.DriveConstants.rightFrontMotorCANID);
   private final WPI_TalonSRX leftRearMotor = new WPI_TalonSRX(Constants.DriveConstants.leftRearMotorCANID);
   private final WPI_TalonSRX rightRearMotor = new WPI_TalonSRX(Constants.DriveConstants.rightRearMotorCANID);
+
+  
   /** Creates a new DriveSubsytem. */
 
   DifferentialDrive diffDrive;
@@ -24,7 +26,7 @@ public class DriveSubsytem extends SubsystemBase {
   public DriveSubsytem() {
     configureMotors();
     setBrakeMode();
-    //diffDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+    diffDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
   }
   
   private void configureMotors(){
@@ -38,9 +40,9 @@ public class DriveSubsytem extends SubsystemBase {
     leftRearMotor.setInverted(Constants.DriveConstants.leftRearMotorInverted);
     rightRearMotor.setInverted(Constants.DriveConstants.rightRearMotorInverted);
 
-    //leftRearMotor.follow(leftFrontMotor);
-    //rightRearMotor.follow(rightFrontMotor);
-
+    leftRearMotor.follow(leftFrontMotor);
+    rightRearMotor.follow(rightFrontMotor);
+    
   } 
 
   public void setBrakeMode() {
@@ -62,12 +64,12 @@ public class DriveSubsytem extends SubsystemBase {
  }
  public void testRightLeaderMotor(double power) {
   rightFrontMotor.set(power);
-  rightRearMotor.set(power);
+  //rightRearMotor.set(power);
 }
 
   public void testLeftLeaderMotor(double power) {
   leftFrontMotor.set(power);
-  leftRearMotor.set(power);
+  //leftRearMotor.set(power);
 }
 
   @Override
