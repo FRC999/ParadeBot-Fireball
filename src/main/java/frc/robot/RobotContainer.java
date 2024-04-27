@@ -33,7 +33,7 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   
   private final Controller xboxController =
-      new Controller(Constants.OIConstants.ControllerDevice.XBOX_CONTROLLER);
+      new Controller(ControllerDevice.XBOX_CONTROLLER);
 
   public RobotContainer(){
     //configure the trigger bindings
@@ -68,11 +68,11 @@ public class RobotContainer {
   
   private void testMotors() {
     new JoystickButton(xboxController, 4)
-        .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.2)))
-        .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.0)));
-    new JoystickButton(xboxController, 1)
-        .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightLeaderMotor(0.2)))
+        .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightLeaderMotor(0.6)))
         .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightLeaderMotor(0.0)));
+    new JoystickButton(xboxController, 1)
+        .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.6)))
+        .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.0)));
   }
 
   private double getDriverXAxis() {

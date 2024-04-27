@@ -17,21 +17,22 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
   public static class DriveConstants {
-    public static final int rightFrontMotorCANID = 1 ;
-    public static final int leftFrontMotorCANID = 3 ;
-    public static final int rightRearMotorCANID = 4 ;
+    public static final int rightFrontMotorCANID = 3 ;
+	public static final int rightRearMotorCANID = 4 ;
+    public static final int leftFrontMotorCANID = 1 ;
     public static final int leftRearMotorCANID = 2 ;
 
-    public static final boolean rightFrontMotorInverted = false;
-    public static final boolean leftFrontMotorInverted = true;
-    public static final boolean rightRearMotorInverted = false;
-    public static final boolean leftRearMotorInverted = true;
+    
+    public static final boolean rightFrontMotorInverted = true;
+	public static final boolean rightRearMotorInverted = true;
+    public static final boolean leftFrontMotorInverted = false;
+    public static final boolean leftRearMotorInverted = false;
 
     public static double turnAdjust = 0.6;
   }
 
  public static final class OIConstants {
-		public static final int driverControllerPort = 4;
+		public static final int driverControllerPort = 0;
 
 		public static enum ControllerDeviceType {
 			LOGITECH,
@@ -43,7 +44,7 @@ public final class Constants {
 		public static enum ControllerDevice {
 			
 			XBOX_CONTROLLER(
-					4, // Port Number for Xbox controller
+					0, // Port Number for Xbox controller
 					ControllerDeviceType.XBOX,
 					0.03, // deadband X for Xbox
 					0.03, // deadband Y for Xbox //TODO: ALL DEADBAND FOR XBOX IS PLACEHOLDER

@@ -23,6 +23,7 @@ public class DriveSubsytem extends SubsystemBase {
   
   public DriveSubsytem() {
     configureMotors();
+    setBrakeMode();
     //diffDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
   }
   
@@ -37,8 +38,8 @@ public class DriveSubsytem extends SubsystemBase {
     leftRearMotor.setInverted(Constants.DriveConstants.leftRearMotorInverted);
     rightRearMotor.setInverted(Constants.DriveConstants.rightRearMotorInverted);
 
-    leftRearMotor.follow(leftFrontMotor);
-    rightRearMotor.follow(rightFrontMotor);
+    //leftRearMotor.follow(leftFrontMotor);
+    //rightRearMotor.follow(rightFrontMotor);
 
   } 
 
@@ -49,15 +50,24 @@ public class DriveSubsytem extends SubsystemBase {
     rightRearMotor.setNeutralMode(NeutralMode.Brake);
   }
 
+   public void setCoastMode() {
+    leftFrontMotor.setNeutralMode(NeutralMode.Coast);
+    rightFrontMotor.setNeutralMode(NeutralMode.Coast);
+    leftRearMotor.setNeutralMode(NeutralMode.Coast);
+    rightRearMotor.setNeutralMode(NeutralMode.Coast);
+  }
+
  public void manualDrive(double speed, double turn) {
      diffDrive.arcadeDrive(speed, turn);
  }
  public void testRightLeaderMotor(double power) {
   rightFrontMotor.set(power);
+  rightRearMotor.set(power);
 }
 
   public void testLeftLeaderMotor(double power) {
   leftFrontMotor.set(power);
+  leftRearMotor.set(power);
 }
 
   @Override
