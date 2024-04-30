@@ -19,6 +19,8 @@ public final class Constants {
 	public static final int shooterIntakeIn = 2;
 	public static final int fireBallRight = 3;
 	public static final int fireBallLeft = 4;
+
+	public static final int SWITCH_PORT = 1;
   }
   public static class DriveConstants {
     public static final int rightFrontMotorCANID = 3 ;
