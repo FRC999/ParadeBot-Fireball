@@ -15,10 +15,7 @@ public class SmartDashboardSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    updateDisplay();
-  }
-
-  public void updateDisplay() {
     SmartDashboard.putBoolean("Trigger Open: ", RobotContainer.switchSubsystem.limitSwitch.get());
+    SmartDashboard.putNumber("Relative Encoder Value: ", RobotContainer.shooterSubsystem.getTiltEncoder());
   }
 }

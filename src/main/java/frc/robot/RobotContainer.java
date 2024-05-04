@@ -17,7 +17,7 @@ import frc.robot.commands.RightFireBall;
 import frc.robot.commands.ShooterStop;
 import frc.robot.subsystems.DriveSubsytem;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.GPMSubsystem;
 import frc.robot.subsystems.SmartDashboardSubsystem;
 import frc.robot.subsystems.SwitchSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -39,7 +39,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   public final static DriveSubsytem driveSubsystem = new DriveSubsytem(); 
-  public final static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  public final static GPMSubsystem shooterSubsystem = new GPMSubsystem();
   public final static SwitchSubsystem switchSubsystem = new SwitchSubsystem();
   public final static SmartDashboardSubsystem smartDashboardSubsystem = new SmartDashboardSubsystem();
   // Replace with CommandPS4Controller or CommandJoystick if needed

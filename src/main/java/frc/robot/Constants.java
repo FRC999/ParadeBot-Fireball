@@ -125,6 +125,21 @@ public final class Constants {
 		public static final double FireBallSpeed = 0.3;
 
 		public static final double fireBallStop = 0.0;
+
+		/*Tilt Motor Controller Constants*/
+
+		public static final int tiltMotorControllerCANID = 7;
+		public static final boolean tiltMotorInverted = false;
+		public static final boolean tiltEncoderSensorPhase = true; 
+		public static final int PID_TILT = 0;
+		public static final double peakOutput = 0.4;
+		public static final int SLOT_0 = 0;
+		public static final int tiltDefaultAcceptableError = 1; 
+		
+		public static final double P_TILT = 0.01;
+		public static final double I_TILT = 0.01;
+		public static final double D_TILT = 0.01;
+		public static final double F_TILT = 0.01;
 	}
 
 	public static final class CurrentLimitConstants {
