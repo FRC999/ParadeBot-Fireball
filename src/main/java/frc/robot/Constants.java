@@ -19,8 +19,9 @@ public final class Constants {
 	public static final int shooterIntakeIn = 2;
 	public static final int fireBallRight = 3;
 	public static final int fireBallLeft = 4;
-
-	public static final int SWITCH_PORT = 1;
+	public static final int armDown = 5;
+	public static final int armUp = 6;
+	public static final int SWITCH_PORT = 1; //dio port of the encoder
   }
   public static class DriveConstants {
     public static final int rightFrontMotorCANID = 3 ;
@@ -129,17 +130,19 @@ public final class Constants {
 		/*Tilt Motor Controller Constants*/
 
 		public static final int tiltMotorControllerCANID = 7;
-		public static final boolean tiltMotorInverted = false;
-		public static final boolean tiltEncoderSensorPhase = true; 
+		public static final boolean tiltMotorInverted = true;
+		public static final boolean tiltEncoderSensorPhase = false; 
 		public static final int PID_TILT = 0;
-		public static final double peakOutput = 0.4;
+		public static final double peakOutput = 1.0;
 		public static final int SLOT_0 = 0;
 		public static final int tiltDefaultAcceptableError = 1; 
+		public static final int armUpPosition = 140; 
+		public static final int armDownPosition = 0; 
 		
-		public static final double P_TILT = 0.01;
-		public static final double I_TILT = 0.01;
-		public static final double D_TILT = 0.01;
-		public static final double F_TILT = 0.01;
+		public static final double P_TILT = 10.0;
+		public static final double I_TILT = 0.0;
+		public static final double D_TILT = 0.0;
+		public static final double F_TILT = 0.0;
 	}
 
 	public static final class CurrentLimitConstants {

@@ -5,7 +5,8 @@
 package frc.robot;
 
 import frc.robot.Constants.OIConstants.ControllerDevice;
-import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.ArmRelax;
+import frc.robot.commands.ArmUp;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ExampleCommand;
@@ -15,9 +16,10 @@ import frc.robot.commands.IntakeOut;
 import frc.robot.commands.LeftFireBall;
 import frc.robot.commands.RightFireBall;
 import frc.robot.commands.ShooterStop;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsytem;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.GPMSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SmartDashboardSubsystem;
 import frc.robot.subsystems.SwitchSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -39,9 +41,10 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   public final static DriveSubsytem driveSubsystem = new DriveSubsytem(); 
-  public final static GPMSubsystem shooterSubsystem = new GPMSubsystem();
+  public final static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   public final static SwitchSubsystem switchSubsystem = new SwitchSubsystem();
   public final static SmartDashboardSubsystem smartDashboardSubsystem = new SmartDashboardSubsystem();
+  public final static ArmSubsystem armSubsystem = new ArmSubsystem();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   
   private final Controller xboxController =
@@ -75,6 +78,7 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
    // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+  testArm();
   }
 
   
@@ -99,6 +103,12 @@ public class RobotContainer {
       .whileFalse(new FireBallStop());
   }
 
+  private void testArm(){
+    new JoystickButton(xboxController, Constants.OperatorConstants.armUp)
+      .onTrue(new ArmUp())
+      .onFalse(new ArmRelax());
+  }
+ 
   private double getDriverXAxis() {
     return -xboxController.getLeftStickY();
   }
