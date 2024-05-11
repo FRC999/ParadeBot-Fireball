@@ -10,16 +10,18 @@ import frc.robot.commands.ArmUp;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.FireBallStop;
-import frc.robot.commands.IntakeIn;
-import frc.robot.commands.IntakeOut;
-import frc.robot.commands.LeftFireBall;
-import frc.robot.commands.RightFireBall;
+import frc.robot.commands.RunIntakeSequence;
+import frc.robot.commands.RunShooterSequence;
+import frc.robot.commands.ShooterIn;
+import frc.robot.commands.ShooterOut;
+import frc.robot.commands.RunShutter;
 import frc.robot.commands.ShooterStop;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsytem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ShutterDoorSubsytem;
+import frc.robot.subsystems.BreacherMotorSubsystem;
 import frc.robot.subsystems.SmartDashboardSubsystem;
 import frc.robot.subsystems.SwitchSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -45,6 +47,8 @@ public class RobotContainer {
   public final static SwitchSubsystem switchSubsystem = new SwitchSubsystem();
   public final static SmartDashboardSubsystem smartDashboardSubsystem = new SmartDashboardSubsystem();
   public final static ArmSubsystem armSubsystem = new ArmSubsystem();
+  public final static BreacherMotorSubsystem breacherSubsytem = new BreacherMotorSubsystem();
+  public final static ShutterDoorSubsytem shutterDoorSubsystem = new ShutterDoorSubsytem();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   
   private final Controller xboxController =
@@ -53,8 +57,7 @@ public class RobotContainer {
   public RobotContainer(){
     //configure the trigger bindings
     configureBindings();
-    testMotors();
-
+    
       driveSubsystem.setDefaultCommand(
          new DriveManuallyCommand(
             () -> getDriverXAxis(),
@@ -78,7 +81,11 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
    // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-  testArm();
+  //testArm();
+  //testMotors();
+  //testShutter();
+    testIntakeSequence();
+    testShooterSequence();
   }
 
   
@@ -90,17 +97,17 @@ public class RobotContainer {
         .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.6)))
         .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.0)));*/
     new JoystickButton(xboxController, Constants.OperatorConstants.shooterIntakeIn)
-        .whileTrue(new IntakeIn())
+        .whileTrue(new ShooterIn())
         .whileFalse(new ShooterStop());
     new JoystickButton(xboxController, Constants.OperatorConstants.shooterIntakeOut)
-        .whileTrue(new IntakeOut())
+        .whileTrue(new ShooterOut())
         .whileFalse(new ShooterStop());
-    new JoystickButton(xboxController, Constants.OperatorConstants.fireBallLeft)
+/*  new JoystickButton(xboxController, Constants.OperatorConstants.fireBallLeft)
       .whileTrue(new LeftFireBall())
       .whileFalse(new FireBallStop());
     new JoystickButton(xboxController, Constants.OperatorConstants.fireBallRight)
       .whileTrue(new RightFireBall())
-      .whileFalse(new FireBallStop());
+      .whileFalse(new FireBallStop());*/
   }
 
   private void testArm(){
@@ -117,6 +124,21 @@ public class RobotContainer {
     return -xboxController.getRightStickX();
   }
 
+  public void testShutter(){
+    new JoystickButton(xboxController, Constants.OperatorConstants.moveShutter)
+      .onTrue(new RunShutter());
+  }
+
+  public void testIntakeSequence(){
+    new JoystickButton(xboxController,7)
+      .onTrue(new RunIntakeSequence())
+      .onFalse(new ShooterStop());
+  }
+
+  public void testShooterSequence(){
+    new JoystickButton(xboxController, 8)
+      .onTrue(new RunShooterSequence());
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

@@ -23,7 +23,6 @@ public class ShooterSubsystem extends SubsystemBase {
   public ShooterSubsystem() {
     rightSpinnerMotor = new WPI_TalonSRX(Constants.GPMConstants.rightSpinnerMotorCANID);
     leftSpinnerMotor = new WPI_TalonSRX(Constants.GPMConstants.leftSpinnerMotorCANID);
-    fireBallMotor = new WPI_TalonSRX(Constants.GPMConstants.FireBallCANID);
     configureMotors();
     //configureCurrentLimiterFireball();
   }
@@ -54,18 +53,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void stopIntakeMotor() {
     rightSpinnerMotor.set(Constants.GPMConstants.StopIntake);
-  }
-
-  public void FireBallRight() {
-    fireBallMotor.set(Constants.GPMConstants.FireBallSpeed);
-  }
-
-  public void FireBallLeft() {
-    fireBallMotor.set(-Constants.GPMConstants.FireBallSpeed);
-  }
-
-  public void FireBallStop() {
-    fireBallMotor.set(Constants.GPMConstants.fireBallStop);
   }
 
   private void configureCurrentLimiterFireball() {

@@ -21,6 +21,7 @@ public final class Constants {
 	public static final int fireBallLeft = 4;
 	public static final int armDown = 5;
 	public static final int armUp = 6;
+	public static final int moveShutter = 7;
 	public static final int SWITCH_PORT = 1; //dio port of the encoder
   }
   public static class DriveConstants {
@@ -111,7 +112,7 @@ public final class Constants {
 	}
 
 	public static final class GPMConstants {
-		public static final double IntakeSpeed = -0.7;
+		public static final double IntakeSpeed = -0.6;
 
 		public static final double ShooterSpeed = 0.9;
 
@@ -120,12 +121,6 @@ public final class Constants {
 		public static final int rightSpinnerMotorCANID = 6;
 
 		public static final int leftSpinnerMotorCANID = 5;
-
-		public static final int FireBallCANID = 8;
-
-		public static final double FireBallSpeed = 0.3;
-
-		public static final double fireBallStop = 0.0;
 
 		/*Tilt Motor Controller Constants*/
 
@@ -145,6 +140,25 @@ public final class Constants {
 		public static final double F_TILT = 0.0;
 	}
 
+	public static final class BreacherMotorConstants {
+		public static final int leftBreacherMotorCANID = 9;
+		public static final int rightBreacherMotorCANID = 9;
+
+		public static final double breacherMotorForwardSpeed = 0.4;
+		public static final double breacherMotorReverseSpeed = -0.4;
+
+		public static final boolean leftBreacherMotorInverted = false;
+		public static final boolean rightBreacherMotorInverted = true; 
+	}
+
+	public static class ShutterDoorConstants{
+		public static final int shutterMotorCANID = 8;
+
+		public static final double shutterPower = 0.5;
+
+		public static final boolean shutterMotorInverted = true;
+	}
+
 	public static final class CurrentLimitConstants {
 		public static final int angleContinuousCurrentLimit = 1; // amperes
         	public static final int anglePeakCurrentLimit = 5; // amperes
@@ -154,3 +168,5 @@ public final class Constants {
 	}
 
 }
+
+	

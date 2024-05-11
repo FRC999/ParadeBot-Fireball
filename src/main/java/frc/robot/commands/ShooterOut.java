@@ -6,12 +6,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.RobotContainer;
-
+import frc.robot.subsystems.ShooterSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class FireBallStop extends InstantCommand {
-  public FireBallStop() {
+public class ShooterOut extends InstantCommand {
+  public ShooterOut() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.shooterSubsystem);
   }
@@ -19,6 +19,6 @@ public class FireBallStop extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.shooterSubsystem.FireBallStop();
+    RobotContainer.shooterSubsystem.spinIntakeForward();
   }
 }
