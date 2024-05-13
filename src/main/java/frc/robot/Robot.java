@@ -28,6 +28,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    RobotContainer.shutterDoorSubsystem.runShutter(0);
   }
 
   /**
@@ -48,7 +50,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    RobotContainer.shutterDoorSubsystem.runShutter(0);
+  }
 
   @Override
   public void disabledPeriodic() {}
@@ -76,6 +80,7 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+      RobotContainer.shutterDoorSubsystem.runShutter(0);
     }
   }
 

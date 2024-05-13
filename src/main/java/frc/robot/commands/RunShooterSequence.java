@@ -17,8 +17,9 @@ public class RunShooterSequence extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ArmUp(),
+      new WaitCommand(0.5),
       new ShooterOut(),
-      new WaitCommand(1.5),
+      new WaitCommand(1.0),
       new RunShutter(),
       new WaitCommand(0.5),
       new ArmRelax(),
