@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class BreacherMotorSubsystem extends SubsystemBase {
-  private TalonSRX leftBreacherMotor;
-  private TalonSRX rightBreacherMotor;
+  private WPI_TalonSRX leftBreacherMotor;
+  private WPI_TalonSRX rightBreacherMotor;
 
   /** Creates a new ShutterDoorSubsystem. */
   public BreacherMotorSubsystem() {
@@ -27,7 +27,7 @@ public class BreacherMotorSubsystem extends SubsystemBase {
     leftBreacherMotor.setInverted(Constants.BreacherMotorConstants.leftBreacherMotorInverted);
     rightBreacherMotor.setInverted(Constants.BreacherMotorConstants.rightBreacherMotorInverted);
 
-    leftBreacherMotor.follow(rightBreacherMotor);
+    //leftBreacherMotor.follow(rightBreacherMotor);
   }
 
   public void setBrakeModeSpinnerMotor() {
@@ -35,6 +35,29 @@ public class BreacherMotorSubsystem extends SubsystemBase {
     leftBreacherMotor.setNeutralMode(NeutralMode.Brake);
   }
 
+  public void rightBreacherMotorForward() {
+    rightBreacherMotor.set(Constants.BreacherMotorConstants.rightBreacherMotorForwardPower);
+  }
+  
+  public void leftBreacherMotorForward(){
+     leftBreacherMotor.set(Constants.BreacherMotorConstants.leftBreacherMotorForwardPower);
+  }
+
+  public void rightBreacherMotorReverse() {
+    rightBreacherMotor.set(Constants.BreacherMotorConstants.rightBreacherMotorReversePower);
+  }
+
+  public void leftBreacherMotorReverse(){
+    leftBreacherMotor.set(Constants.BreacherMotorConstants.leftBreacherMotorReversePower);
+  }
+
+  public double getRightBreacherCurrentRecord() {
+    return rightBreacherMotor.getSupplyCurrent();
+  }
+
+  public double getLeftBreacherCurrentRecord() {
+    return leftBreacherMotor.getSupplyCurrent();
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

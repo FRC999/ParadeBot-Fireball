@@ -144,8 +144,10 @@ public final class Constants {
 		public static final int leftBreacherMotorCANID = 9;
 		public static final int rightBreacherMotorCANID = 9;
 
-		public static final double breacherMotorForwardSpeed = 0.4;
-		public static final double breacherMotorReverseSpeed = -0.4;
+		public static final double rightBreacherMotorForwardPower = 0.4;
+		public static final double rightBreacherMotorReversePower = -0.4;
+		public static final double leftBreacherMotorForwardPower = 0.4;
+		public static final double leftBreacherMotorReversePower = -0.4;
 
 		public static final boolean leftBreacherMotorInverted = false;
 		public static final boolean rightBreacherMotorInverted = true; 

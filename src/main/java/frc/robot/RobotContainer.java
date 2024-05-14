@@ -84,8 +84,9 @@ public class RobotContainer {
   //testArm();
   //testMotors();
   //testShutter();
-    testIntakeSequence();
-    testShooterSequence();
+  //testIntakeSequence();
+  // testShooterSequence();
+  testArms();
   }
 
   
@@ -110,10 +111,13 @@ public class RobotContainer {
       .whileFalse(new FireBallStop());*/
   }
 
-  private void testArm(){
-    new JoystickButton(xboxController, Constants.OperatorConstants.armUp)
-      .onTrue(new ArmUp())
+  private void testArms(){
+    new JoystickButton(xboxController, 8)
+      .onTrue(new  )
       .onFalse(new ArmRelax());
+
+    new JoystickButton(xboxController, 7)
+      .onTrue(new )
   }
  
   private double getDriverXAxis() {
