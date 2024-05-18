@@ -8,8 +8,10 @@ import frc.robot.Constants.OIConstants.ControllerDevice;
 import frc.robot.commands.ArmRelax;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.Autos;
+import frc.robot.commands.BreacherArmLeftRetract;
 import frc.robot.commands.BreacherArmLeftWave;
 import frc.robot.commands.BreacherArmRightForward;
+import frc.robot.commands.BreacherArmRightRetract;
 import frc.robot.commands.BreacherArmRightReverse;
 import frc.robot.commands.BreacherArmRightWave;
 import frc.robot.commands.DriveManuallyCommand;
@@ -94,7 +96,7 @@ public class RobotContainer {
   //testShutter();
   //testIntakeSequence();
   // testShooterSequence();
-  testArms();
+  //testArms();
   finalControlMappings();
   }
 
@@ -105,6 +107,12 @@ public class RobotContainer {
 
     new Trigger(() -> xboxController.getRawAxis(Constants.OIConstants.xBoxControllerLeftTrigger) > 0.3)
       .onTrue(new RunShooterSequence());
+
+    new JoystickButton(xboxController, 5)
+      .onTrue(new BreacherArmLeftWave().alongWith(new BreacherArmRightWave()));
+    
+    new JoystickButton(xboxController, 6)
+      .onTrue(new BreacherArmRightRetract().alongWith(new BreacherArmLeftRetract()));
   }
 
 
@@ -115,7 +123,7 @@ public class RobotContainer {
         .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightLeaderMotor(0.0)));
     new JoystickButton(xboxController, 4)
         .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.6)))
-        .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.0)));*/
+        .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftLeaderMotor(0.0)));
     new JoystickButton(xboxController, Constants.OperatorConstants.shooterIntakeIn)
         .whileTrue(new ShooterIn())
         .whileFalse(new ShooterStop());
@@ -129,16 +137,6 @@ public class RobotContainer {
       .whileTrue(new RightFireBall())
       .whileFalse(new FireBallStop());*/
   }
-
-  private void testArms(){
-    new JoystickButton(xboxController, 8)
-      .onTrue(new BreacherArmLeftWave().alongWith(new BreacherArmRightWave()))
-      .onFalse(new StopRightBreacherArm().alongWith(new StopLeftBreacherArm()));
-
-    new JoystickButton(xboxController, 7)
-      .onTrue(new BreacherArmRightWave())
-      .onFalse(new StopRightBreacherArm());
-  }
  
   private double getDriverXAxis() {
     return -xboxController.getLeftStickY();
@@ -148,7 +146,7 @@ public class RobotContainer {
     return -xboxController.getRightStickX();
   }
 
-  public void testShutter(){
+  /*public void testShutter(){
     new JoystickButton(xboxController, Constants.OperatorConstants.moveShutter)
       .onTrue(new RunShutter());
   }
@@ -162,7 +160,16 @@ public class RobotContainer {
   public void testShooterSequence(){
     new JoystickButton(xboxController, 8)
       .onTrue(new RunShooterSequence());
-  }
+  } 
+   private void testArms(){
+    new JoystickButton(xboxController, 8)
+      .onTrue(new BreacherArmLeftWave().alongWith(new BreacherArmRightWave()))
+      .onFalse(new StopRightBreacherArm().alongWith(new StopLeftBreacherArm()));
+
+    new JoystickButton(xboxController, 7)
+      .onTrue(new BreacherArmRightWave())
+      .onFalse(new StopRightBreacherArm();   
+  }*/
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
