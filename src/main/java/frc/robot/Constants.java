@@ -109,12 +109,15 @@ public final class Constants {
 				return cubeControllerRightStick;
 			}
 		}
+
+		public static final int xBoxControllerLeftTrigger = 2;
+		public static final int xBoxControllerRightTrigger = 3;
 	}
 
 	public static final class GPMConstants {
 		public static final double IntakeSpeed = -0.6;
 
-		public static final double ShooterSpeed = 0.9;
+		public static final double ShooterSpeed = 1.0;
 
 		public static final double StopIntake = 0.0;
 
@@ -131,7 +134,7 @@ public final class Constants {
 		public static final double peakOutput = 1.0;
 		public static final int SLOT_0 = 0;
 		public static final int tiltDefaultAcceptableError = 1; 
-		public static final int armUpPosition = 140; 
+		public static final int armUpPosition = 200; 
 		public static final int armDownPosition = 0; 
 		
 		public static final double P_TILT = 10.0;
@@ -142,15 +145,18 @@ public final class Constants {
 
 	public static final class BreacherMotorConstants {
 		public static final int leftBreacherMotorCANID = 9;
-		public static final int rightBreacherMotorCANID = 9;
+		public static final int rightBreacherMotorCANID = 10;
 
 		public static final double rightBreacherMotorForwardPower = 0.4;
 		public static final double rightBreacherMotorReversePower = -0.4;
 		public static final double leftBreacherMotorForwardPower = 0.4;
 		public static final double leftBreacherMotorReversePower = -0.4;
+		public static final double stopRightBreacherMotor = 0.0;
+		public static final double stopLeftBreacherArm = 0.0;
+		public static final double stallCurrent = 2.5;
 
-		public static final boolean leftBreacherMotorInverted = false;
-		public static final boolean rightBreacherMotorInverted = true; 
+		public static final boolean leftBreacherMotorInverted = true;
+		public static final boolean rightBreacherMotorInverted = false; 
 	}
 
 	public static class ShutterDoorConstants{

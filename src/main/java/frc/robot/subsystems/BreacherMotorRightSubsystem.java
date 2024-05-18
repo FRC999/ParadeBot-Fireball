@@ -11,20 +11,18 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class BreacherMotorSubsystem extends SubsystemBase {
-  private WPI_TalonSRX leftBreacherMotor;
+public class BreacherMotorRightSubsystem extends SubsystemBase {
+ 
   private WPI_TalonSRX rightBreacherMotor;
 
   /** Creates a new ShutterDoorSubsystem. */
-  public BreacherMotorSubsystem() {
-     leftBreacherMotor = new WPI_TalonSRX(Constants.BreacherMotorConstants.leftBreacherMotorCANID);
+  public BreacherMotorRightSubsystem() {
+     
      rightBreacherMotor = new WPI_TalonSRX(Constants.BreacherMotorConstants.rightBreacherMotorCANID);
-
      configureMotors();
   }
 
   public void configureMotors(){
-    leftBreacherMotor.setInverted(Constants.BreacherMotorConstants.leftBreacherMotorInverted);
     rightBreacherMotor.setInverted(Constants.BreacherMotorConstants.rightBreacherMotorInverted);
 
     //leftBreacherMotor.follow(rightBreacherMotor);
@@ -32,31 +30,22 @@ public class BreacherMotorSubsystem extends SubsystemBase {
 
   public void setBrakeModeSpinnerMotor() {
     rightBreacherMotor.setNeutralMode(NeutralMode.Brake);
-    leftBreacherMotor.setNeutralMode(NeutralMode.Brake);
   }
 
   public void rightBreacherMotorForward() {
     rightBreacherMotor.set(Constants.BreacherMotorConstants.rightBreacherMotorForwardPower);
-  }
-  
-  public void leftBreacherMotorForward(){
-     leftBreacherMotor.set(Constants.BreacherMotorConstants.leftBreacherMotorForwardPower);
   }
 
   public void rightBreacherMotorReverse() {
     rightBreacherMotor.set(Constants.BreacherMotorConstants.rightBreacherMotorReversePower);
   }
 
-  public void leftBreacherMotorReverse(){
-    leftBreacherMotor.set(Constants.BreacherMotorConstants.leftBreacherMotorReversePower);
+  public void stopBreacherRightArm() {
+    rightBreacherMotor.set(Constants.BreacherMotorConstants.stopRightBreacherMotor);
   }
 
   public double getRightBreacherCurrentRecord() {
     return rightBreacherMotor.getSupplyCurrent();
-  }
-
-  public double getLeftBreacherCurrentRecord() {
-    return leftBreacherMotor.getSupplyCurrent();
   }
   @Override
   public void periodic() {

@@ -8,6 +8,10 @@ import frc.robot.Constants.OIConstants.ControllerDevice;
 import frc.robot.commands.ArmRelax;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.Autos;
+import frc.robot.commands.BreacherArmLeftWave;
+import frc.robot.commands.BreacherArmRightForward;
+import frc.robot.commands.BreacherArmRightReverse;
+import frc.robot.commands.BreacherArmRightWave;
 import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.RunIntakeSequence;
@@ -16,12 +20,15 @@ import frc.robot.commands.ShooterIn;
 import frc.robot.commands.ShooterOut;
 import frc.robot.commands.RunShutter;
 import frc.robot.commands.ShooterStop;
+import frc.robot.commands.StopLeftBreacherArm;
+import frc.robot.commands.StopRightBreacherArm;
 import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.BreacherMotorLeftSubsystem;
 import frc.robot.subsystems.DriveSubsytem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ShutterDoorSubsytem;
-import frc.robot.subsystems.BreacherMotorSubsystem;
+import frc.robot.subsystems.BreacherMotorRightSubsystem;
 import frc.robot.subsystems.SmartDashboardSubsystem;
 import frc.robot.subsystems.SwitchSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -47,7 +54,8 @@ public class RobotContainer {
   public final static SwitchSubsystem switchSubsystem = new SwitchSubsystem();
   public final static SmartDashboardSubsystem smartDashboardSubsystem = new SmartDashboardSubsystem();
   public final static ArmSubsystem armSubsystem = new ArmSubsystem();
-  public final static BreacherMotorSubsystem breacherSubsytem = new BreacherMotorSubsystem();
+  public final static BreacherMotorRightSubsystem breacherMotorRightSubsytem = new BreacherMotorRightSubsystem();
+  public final static BreacherMotorLeftSubsystem breacherMotorLeftSubsystem = new BreacherMotorLeftSubsystem();
   public final static ShutterDoorSubsytem shutterDoorSubsystem = new ShutterDoorSubsytem();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   
@@ -87,9 +95,20 @@ public class RobotContainer {
   //testIntakeSequence();
   // testShooterSequence();
   testArms();
+  finalControlMappings();
   }
 
-  
+  private void finalControlMappings() {
+    new Trigger(() -> xboxController.getRawAxis(Constants.OIConstants.xBoxControllerRightTrigger) > 0.3)
+    .onTrue(new RunIntakeSequence())
+    .onFalse(new ShooterStop()); 
+
+    new Trigger(() -> xboxController.getRawAxis(Constants.OIConstants.xBoxControllerLeftTrigger) > 0.3)
+      .onTrue(new RunShooterSequence());
+  }
+
+
+
   private void testMotors() {
     /*new JoystickButton(xboxController, 3)
         .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightLeaderMotor(0.6)))
@@ -113,11 +132,12 @@ public class RobotContainer {
 
   private void testArms(){
     new JoystickButton(xboxController, 8)
-      .onTrue(new  )
-      .onFalse(new ArmRelax());
+      .onTrue(new BreacherArmLeftWave().alongWith(new BreacherArmRightWave()))
+      .onFalse(new StopRightBreacherArm().alongWith(new StopLeftBreacherArm()));
 
     new JoystickButton(xboxController, 7)
-      .onTrue(new )
+      .onTrue(new BreacherArmRightWave())
+      .onFalse(new StopRightBreacherArm());
   }
  
   private double getDriverXAxis() {

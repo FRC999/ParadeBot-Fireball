@@ -17,7 +17,7 @@ public class SmartDashboardSubsystem extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putBoolean("Trigger Open: ", RobotContainer.switchSubsystem.limitSwitch.get());
     SmartDashboard.putNumber("Relative Encoder Value: ", RobotContainer.armSubsystem.getTiltEncoder());
-    SmartDashboard.putNumber("Right Arm Current Record", RobotContainer.breacherSubsytem.getRightBreacherCurrentRecord());
-    SmartDashboard.putNumber("Left Arm Current Record", RobotContainer.breacherSubsytem.getLeftBreacherCurrentRecord());
+    SmartDashboard.putNumber("Right Arm Current Record", RobotContainer.breacherMotorRightSubsytem.getRightBreacherCurrentRecord());
+    SmartDashboard.putNumber("Left Arm Current Record", RobotContainer.breacherMotorLeftSubsystem.getLeftBreacherCurrentRecord());
   }
 }

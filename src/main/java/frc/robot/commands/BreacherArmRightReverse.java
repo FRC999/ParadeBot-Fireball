@@ -5,22 +5,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class BreacherArmForward extends InstantCommand {
-  public BreacherArmForward() {
-    addRequirements(RobotContainer.breacherSubsytem);
+public class BreacherArmRightReverse extends InstantCommand {
+  public BreacherArmRightReverse() {
+    addRequirements(RobotContainer.breacherMotorRightSubsytem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.breacherSubsytem.rightBreacherMotorForward();
-    //RobotContainer.breacherSubsytem.leftBreacherMotorForward();
+    RobotContainer.breacherMotorRightSubsytem.rightBreacherMotorReverse();
   }
 }
